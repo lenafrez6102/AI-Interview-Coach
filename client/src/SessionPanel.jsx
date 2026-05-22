@@ -92,16 +92,6 @@ function SessionPanel({
     wsRef.current = recognition; // Store in wsRef for cleanup
 
     recognition.onresult = (event) => {
-<<<<<<< HEAD
-      // Get the latest result
-      const lastResultIndex = event.results.length - 1;
-      const transcript = event.results[lastResultIndex][0].transcript;
-      
-      console.log('Speech recognized:', transcript); // Debug log
-      
-      if (transcript && onTranscriptUpdate) {
-        onTranscriptUpdate(transcript + ' ');
-=======
       // Get only final results to avoid duplication
       for (let i = event.resultIndex; i < event.results.length; i++) {
         if (event.results[i].isFinal) {
@@ -110,7 +100,6 @@ function SessionPanel({
             onTranscriptUpdate(transcript + ' ');
           }
         }
->>>>>>> 8061c9c5 (fixed generate questions)
       }
     };
 
@@ -151,20 +140,11 @@ function SessionPanel({
     };
 
     recognition.onend = () => {
-<<<<<<< HEAD
-      console.log('Recognition ended, isActive:', isActiveRef.current); // Debug log
-      // If session is still active, restart recognition (it stops after ~60s of silence)
-      if (isActiveRef.current && wsRef.current === recognition) {
-        console.log('Restarting recognition...'); // Debug log
-        try {
-          recognition.start();
-=======
       // If session is still active, restart recognition (it stops after ~60s of silence or on error)
       if (sessionState === 'active' && wsRef.current === recognition) {
         try {
           recognition.start();
           console.log('Speech recognition restarted');
->>>>>>> 8061c9c5 (fixed generate questions)
         } catch (err) {
           console.error('Failed to restart recognition:', err);
         }

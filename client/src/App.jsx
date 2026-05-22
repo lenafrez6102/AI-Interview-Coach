@@ -62,15 +62,6 @@ function App() {
     setIsLoadingQuestion(true);
     setError(null);
     
-<<<<<<< HEAD
-=======
-    // Reset everything when generating a new question
-    setSessionState('idle');
-    setTranscription('');
-    setFeedback(null);
-    setNoSpeech(false);
-    
->>>>>>> 8061c9c5 (fixed generate questions)
     try {
       const res = await fetch('/api/question', {
         method: 'POST',
