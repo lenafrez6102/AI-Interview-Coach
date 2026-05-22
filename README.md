@@ -8,18 +8,19 @@ A single-page web application that helps college students and entry-level candid
 # 1. Install Ollama
 brew install ollama
 
-# 2. Start Ollama and download model
-ollama serve
+# 2. Download the model (one-time setup)
 ollama pull llama3.2
 
 # 3. Install dependencies
 npm run install:all
 
-# 4. Start the application
+# 4. Start everything (Ollama + Backend + Frontend)
 npm run dev
 
 # 5. Open http://localhost:5173 in Chrome or Edge
 ```
+
+**Note:** `npm run dev` will automatically start Ollama if it's not already running, or detect and use the existing instance.
 
 ## Features
 
@@ -63,15 +64,14 @@ brew install ollama
 # Or download from https://ollama.ai
 ```
 
-### 2. Start Ollama and download the model
+### 2. Download the Ollama model
 
 ```bash
-# Start Ollama service (runs in background)
-ollama serve
-
-# Download llama3.2 model (~2GB)
+# Download llama3.2 model (~2GB, one-time setup)
 ollama pull llama3.2
 ```
+
+**Note:** You don't need to run `ollama serve` manually - it will start automatically with `npm run dev`.
 
 ### 3. Install project dependencies
 
@@ -97,16 +97,31 @@ npm install
 
 ## Running the Application
 
-### Option 1: Start both servers at once (recommended)
+### Start everything with one command
 
 ```bash
 # From the project root
 npm run dev
 ```
 
-This will start both the backend (port 3001) and frontend (port 5173) simultaneously.
+This will automatically:
+- ✅ Start Ollama (or detect if already running)
+- ✅ Start the backend server (port 3001)
+- ✅ Start the frontend dev server (port 5173)
 
-### Option 2: Start servers separately
+All three services run in a single terminal with color-coded output:
+- `[0]` = Ollama
+- `[1]` = Backend server
+- `[2]` = Frontend server
+
+### Alternative: Start servers separately
+
+If you prefer to run services individually:
+
+**Ollama:**
+```bash
+ollama serve
+```
 
 **Backend:**
 ```bash
